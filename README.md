@@ -1,6 +1,6 @@
 # Design Patterns In Kotlin
 Inspired by [design-patterns-kotlin](https://github.com/mmolosay/design-patterns-kotlin "design-patterns-kotlin") by [mmolosay](https://github.com/mmolosay "mmolosay"), 
-be sure to leave him a star.
+be sure to leave him a star in my stead.
 
 ## Table of Contents
 

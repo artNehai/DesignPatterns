@@ -20,10 +20,10 @@ abstract class BMWFactory {
         }
 }
 
-class BMWBerlinDieselFactory : BMWFactory() {
+class BMWBerlinFactory : BMWFactory() {
     override fun produceEngine() = DieselEngine()
 }
 
-class BMWFrankfurtGasolineFactory : BMWFactory() {
+class BMWFrankfurtFactory : BMWFactory() {
     override fun produceEngine() = GasolineEngine()
 }

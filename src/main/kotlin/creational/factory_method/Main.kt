@@ -3,11 +3,11 @@ package creational.factory_method
 import util.trace
 
 fun main() {
-    val localCFO = "CFO Berlin"
+    val manager = "Manager in Berlin"
     val factory: BMWFactory =
-        when (localCFO) {
-            "CFO Berlin" -> BMWBerlinDieselFactory()
-            "CFO Frankfurt" -> BMWFrankfurtGasolineFactory()
+        when (manager) {
+            "Manager in Berlin" -> BMWBerlinFactory()
+            "Manager in Frankfurt" -> BMWFrankfurtFactory()
             else -> {
                 println("New factory is being built")
                 return

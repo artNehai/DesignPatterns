@@ -91,3 +91,79 @@ You forgot to tune the engine!
 Engine is tuned. Works with diesel
 Successfully delivered
 ```
+
+
+[Abstract Factory](/src/main/kotlin/creational/abstract_factory)
+-----------------
+
+#### Problem
+It's hard to imagine for a car company to produce only the engines. We want to extend the production with different kinds of ignition systems, each works with different type of engine. By implementing this pattern we don’t have to worry about creating the wrong ignation system which doesn’t match the engine already created.
+
+
+#### Example
+```kotlin
+interface Engine {
+    fun info(): String
+}
+
+class DieselEngine : Engine {
+    override fun info() = "Engine that works with diesel"
+}
+
+class GasolineEngine : Engine {
+    override fun info() = "Engine that works with gasoline"
+}
+
+interface IgnitionSystem {
+    fun ignite(): String
+}
+
+class CompressionIgnition : IgnitionSystem {
+    override fun ignite() = "Ignition system: Compress fuel"
+}
+
+class SparkIgnition : IgnitionSystem {
+    override fun ignite() = "Ignition system: Spark!!"
+}
+
+interface BMWFactory {
+    fun createEngine(): Engine
+    fun createIgnitionSystem(): IgnitionSystem
+}
+
+class BMWBerlinFactory : BMWFactory {
+    override fun createEngine(): Engine = DieselEngine()
+    override fun createIgnitionSystem(): IgnitionSystem = CompressionIgnition()
+}
+
+class BMWFrankfurtFactory : BMWFactory {
+    override fun createEngine(): Engine = GasolineEngine()
+    override fun createIgnitionSystem(): IgnitionSystem = SparkIgnition()
+}
+```
+
+#### Usage
+```kotlin
+val location = "Frankfurt"
+val factory: BMWFactory =
+    when (location) {
+        "Berlin" -> BMWBerlinFactory()
+        "Frankfurt" -> BMWFrankfurtFactory()
+        else -> {
+            println("New factory is being built")
+            return
+        }
+    }
+
+// Production
+val engine = factory.createEngine()
+val ignitionSystem = factory.createIgnitionSystem()
+trace(engine.info())
+trace(ignitionSystem.ignite())
+```
+
+#### Trace
+```
+Engine that works with gasoline
+Ignition system: Spark!!
+```

@@ -7,6 +7,8 @@ be sure to leave him a star.
 * [Creational Patterns](#creational)
 	* [Factory Method](#factory-method)
 	* [Abstract Factory](#abstract-factory)
+	* [Builder](#builder)
+
 
 Creational
 ==========
@@ -16,10 +18,11 @@ Creational
 >
 >**Source:** [wikipedia.org](http://en.wikipedia.org/wiki/Creational_pattern)
 
+
 [Factory Method](/src/main/kotlin/creational/factory_method)
 -----------------
 
-#### Problem
+#### Premise
 As the car company grows there is need to expand production with different types of engines. By implementing this pattern we ensure that the codebase isn't tied to any 
 particular engine type, hence introduciton of a new type won't break the existing code.
 
@@ -96,9 +99,8 @@ Successfully delivered
 [Abstract Factory](/src/main/kotlin/creational/abstract_factory)
 -----------------
 
-#### Problem
+#### Premise
 It's hard to imagine for a car company to produce only the engines. We want to extend the production with different kinds of ignition systems, each works with different type of engine. By implementing this pattern we don’t have to worry about creating the wrong ignation system which doesn’t match the engine already created.
-
 
 #### Example
 ```kotlin
@@ -166,4 +168,82 @@ trace(ignitionSystem.ignite())
 ```
 Engine that works with gasoline
 Ignition system: Spark!!
+```
+
+
+[Builder](/src/main/kotlin/creational/builder)
+-----------------
+
+#### Example
+```kotlin
+class CoffeeBuilder {
+    private var result = Coffee()
+
+    fun reset() {
+        result = Coffee()
+    }
+    fun addEspresso(portions: Int) {
+        result.espressoPortions += portions
+    }
+    fun addWater(mg: Int) {
+        result.waterMg += mg
+    }
+    fun addMilk(mg: Int) {
+        result.milkMg += mg
+    }
+    fun addSugar(portions: Int) {
+        result.sugarPortions += portions
+    }
+    fun getResult() = result
+}
+
+class Barista(
+    private val builder: CoffeeBuilder,
+) {
+    fun makeAmericano() {
+        builder.reset()
+        builder.addWater(mg = 50)
+        builder.addEspresso(portions = 1)
+    }
+
+    fun makeCappuccino() {
+        builder.reset()
+        builder.addEspresso(portions = 2)
+        builder.addMilk(mg = 150)
+    }
+}
+
+data class Coffee(
+    var espressoPortions: Int = 0,
+    var waterMg: Int = 0,
+    var milkMg: Int = 0,
+    var sugarPortions: Int = 0,
+) {
+    override fun toString() =
+        when {
+            waterMg != 0 -> "Americano: $sugarPortions sugar"
+            milkMg != 0 -> "Cappuccino: $sugarPortions sugar"
+            else -> "Coffee isn't ready"
+        }
+}
+```
+
+#### Usage
+```kotlin
+val coffeeBuilder = CoffeeBuilder()
+val barista = Barista(coffeeBuilder)
+
+// Director class makes coffee
+barista.makeAmericano()
+trace(coffeeBuilder.getResult())
+
+// Client makes his adjustments
+coffeeBuilder.addSugar(portions = 2)
+trace(coffeeBuilder.getResult())
+```
+
+#### Trace
+```
+Americano: 0 sugar
+Americano: 2 sugar
 ```

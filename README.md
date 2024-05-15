@@ -8,6 +8,7 @@ be sure to leave him a star.
 	* [Factory Method](#factory-method)
 	* [Abstract Factory](#abstract-factory)
 	* [Builder](#builder)
+   	* [Prototype](#prototype)
 
 
 Creational

@@ -10,6 +10,7 @@ class Pasta(
     portion: String = "Medium",
     extra: String? = null,
 ) : Meal {
+
     override val portionSize = portion
     override val extraIngredients = extra
 
@@ -26,6 +27,7 @@ class Pasta(
 class Espresso(
     private val isWithSugar: Boolean = false,
 ) : Meal {
+
     override val portionSize = "Small"
     override val extraIngredients = if (isWithSugar) "sugar" else null
 

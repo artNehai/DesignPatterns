@@ -360,7 +360,7 @@ Structural
 >**Source:** [wikipedia.org](http://en.wikipedia.org/wiki/Structural_pattern)
 
 
-[Adapter](/src/main/kotlin/creational/adapter)
+[Adapter](/src/main/kotlin/structural/adapter)
 -----------------
 
 #### Example

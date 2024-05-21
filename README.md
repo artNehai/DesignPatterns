@@ -9,6 +9,7 @@ be sure to leave him a star.
 	* [Abstract Factory](#abstract-factory)
 	* [Builder](#builder)
    	* [Prototype](#prototype)
+   	* [Singleton](#singleton)
 
 
 Creational
@@ -311,4 +312,40 @@ trace("Second order: ${order2.joinToString()}")
 ```
 First order: Medium pasta, Espresso with sugar
 Second order: Medium pasta, Espresso with sugar
+```
+
+
+[Singleton](/src/main/kotlin/creational/singleton)
+-----------------
+
+#### Example
+```kotlin
+class NotesFile private constructor() {
+    val entries = mutableListOf("Initial note")
+
+    companion object {
+        private var notesFile: NotesFile? = null
+
+        fun getFile(): NotesFile =
+            synchronized(this) {
+                notesFile ?: NotesFile().also { notesFile = it }
+            }
+    }
+}
+```
+
+#### Usage
+```kotlin
+val accessPoint1 = NotesFile.getFile()
+trace("AP1 - ${accessPoint1.entries.joinToString()}")
+val accessPoint2 = NotesFile.getFile()
+
+accessPoint2.entries.add("Added from second access point")
+trace("AP2 - ${accessPoint2.entries.joinToString()}")
+```
+
+#### Trace
+```
+AP1 - Initial note
+AP2 - Initial note, Added from second access point
 ```

@@ -10,6 +10,8 @@ be sure to leave him a star.
 	* [Builder](#builder)
    	* [Prototype](#prototype)
    	* [Singleton](#singleton)
+* [Structural Patterns](#structural)
+  	* [Adapter](#adapter)
 
 
 Creational
@@ -348,4 +350,56 @@ trace("AP2 - ${accessPoint2.entries.joinToString()}")
 ```
 AP1 - Initial note
 AP2 - Initial note, Added from second access point
+```
+
+
+Structural
+==========
+>In software engineering, structural design patterns are design patterns that ease the design by identifying a simple way to realize relationships between entities.
+>
+>**Source:** [wikipedia.org](http://en.wikipedia.org/wiki/Structural_pattern)
+
+
+[Adapter](/src/main/kotlin/creational/adapter)
+-----------------
+
+#### Example
+```kotlin
+interface EuroPlug {
+    val poles: String
+}
+
+class AmericanPlug {
+    val prongs = "two flat prongs"
+}
+
+class EuroPlugAdapter : EuroPlug {
+    private val americanPlug = AmericanPlug()
+
+    override val poles = americanPlug.prongs
+        .replace(oldValue = "flat", newValue = "round")
+        .replace(oldValue = "prongs", newValue = "poles")
+}
+
+class EuroSocket(
+    private val euroPlug: EuroPlug,
+) {
+    fun connect() = """
+        My plug has ${euroPlug.poles}.
+        Fortunately, I didn't forget the adapter!
+    """.trimIndent()
+}
+```
+
+#### Usage
+```kotlin
+val myEuroPlugAdapter = EuroPlugAdapter()
+val euroSocket = EuroSocket(euroPlug = myEuroPlugAdapter)
+trace(euroSocket.connect())
+```
+
+#### Trace
+```
+My plug has two round poles.
+Fortunately, I didn't forget the adapter!
 ```

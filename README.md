@@ -361,7 +361,7 @@ Structural
 >**Source:** [wikipedia.org](http://en.wikipedia.org/wiki/Structural_pattern)
 
 
-[Adapter](/src/main/kotlin/structural/adapter)
+[Adapter](/src/main/kotlin/structural/adapter/Adapter.kt)
 -----------------
 
 #### Example
@@ -406,7 +406,7 @@ Fortunately, I didn't forget the adapter!
 ```
 
 
-[Bridge](/src/main/kotlin/structural/bridge)
+[Bridge](/src/main/kotlin/structural/bridge/Bridge.kt)
 -----------------
 
 #### Example

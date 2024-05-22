@@ -318,7 +318,7 @@ Second order: Medium pasta, Espresso with sugar
 ```
 
 
-[Singleton](/src/main/kotlin/creational/singleton)
+[Singleton](/src/main/kotlin/creational/singleton/Singleton.kt)
 -----------------
 
 #### Example

@@ -26,6 +26,7 @@ Creational
 
 [Factory Method](/src/main/kotlin/creational/factory_method)
 -----------------
+Factory Method is a creational design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.
 
 #### Premise
 As the car company grows there is need to expand production with different types of engines. By implementing this pattern we ensure that the codebase isn't tied to any 
@@ -103,6 +104,7 @@ Successfully delivered
 
 [Abstract Factory](/src/main/kotlin/creational/abstract_factory)
 -----------------
+Abstract Factory is a creational design pattern that lets you produce families of related objects without specifying their concrete classes.
 
 #### Premise
 It's hard to imagine for a car company to produce only the engines. We want to extend the production with different kinds of ignition systems, each works with different type of engine. By implementing this pattern we don’t have to worry about creating the wrong ignation system which doesn’t match the engine already created.
@@ -178,6 +180,7 @@ Ignition system: Spark!!
 
 [Builder](/src/main/kotlin/creational/builder)
 -----------------
+Builder is a creational design pattern that lets you construct complex objects step by step. The pattern allows you to produce different types and representations of an object using the same construction code.
 
 #### Example
 ```kotlin
@@ -256,6 +259,7 @@ Americano: 2 sugar
 
 [Prototype](/src/main/kotlin/creational/prototype)
 -----------------
+Prototype is a creational design pattern that lets you copy existing objects without making your code dependent on their classes.
 
 #### Example
 ```kotlin
@@ -320,6 +324,7 @@ Second order: Medium pasta, Espresso with sugar
 
 [Singleton](/src/main/kotlin/creational/singleton/Singleton.kt)
 -----------------
+Singleton is a creational design pattern that lets you ensure that a class has only one instance, while providing a global access point to this instance.
 
 #### Example
 ```kotlin
@@ -363,6 +368,7 @@ Structural
 
 [Adapter](/src/main/kotlin/structural/adapter/Adapter.kt)
 -----------------
+Adapter is a structural design pattern that allows objects with incompatible interfaces to collaborate.
 
 #### Example
 ```kotlin
@@ -408,6 +414,7 @@ Fortunately, I didn't forget the adapter!
 
 [Bridge](/src/main/kotlin/structural/bridge/Bridge.kt)
 -----------------
+Bridge is a structural design pattern that lets you split a large class or a set of closely related classes into two separate hierarchies—abstraction and implementation—which can be developed independently of each other.
 
 #### Example
 ```kotlin

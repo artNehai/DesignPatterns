@@ -12,6 +12,7 @@ be sure to leave him a star.
    	* [Singleton](#singleton)
 * [Structural Patterns](#structural)
   	* [Adapter](#adapter)
+  	* [Bridge](#bridge)
 
 
 Creational
@@ -402,4 +403,55 @@ trace(euroSocket.connect())
 ```
 My plug has two round poles.
 Fortunately, I didn't forget the adapter!
+```
+
+
+[Bridge](/src/main/kotlin/structural/bridge)
+-----------------
+
+#### Example
+```kotlin
+open class FreeAudioPlayer(
+    private val outputDevice: OutputDevice,
+) {
+    fun setVolume(value: Int): String = outputDevice.setVolume(value)
+}
+
+class AdvancedAudioPlayer(
+    private val outputDevice: OutputDevice,
+) : FreeAudioPlayer(outputDevice) {
+    fun setBass(value: Int): String = outputDevice.setBass(value)
+}
+
+interface OutputDevice {
+    fun setVolume(value: Int): String
+    fun setBass(value: Int): String
+}
+
+class Headphones : OutputDevice {
+    override fun setVolume(value: Int) = "Headphones' volume is set to $value"
+    override fun setBass(value: Int) = "Headphones' bass is set to $value"
+}
+
+class Speakers : OutputDevice {
+    override fun setVolume(value: Int) = "Speakers' volume is set to $value"
+    override fun setBass(value: Int) = "Speakers' bass is set to $value"
+}
+```
+
+#### Usage
+```kotlin
+val speakers = Speakers()
+val freePlayer = FreeAudioPlayer(speakers)
+trace(freePlayer.setVolume(10))
+
+val headphones = Headphones()
+val advancedPlayer = AdvancedAudioPlayer(headphones)
+trace(advancedPlayer.setBass(24))
+```
+
+#### Trace
+```
+Speakers' volume is set to 10
+Headphones' bass is set to 24
 ```

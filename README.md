@@ -15,6 +15,7 @@ be sure to leave him a star.
   	* [Bridge](#bridge)
   	* [Composite](#composite)
   	* [Decorator](#decorator)
+  	* [Facade](#facade)
 
 
 Creational
@@ -577,4 +578,41 @@ trace("High price phone: ${highPricePhone.getInfo()}")
 Low price phone: Capacity - 256, Basic voice search
 Medium price phone: Capacity - 512, Basic voice search
 High price phone: Capacity - 512, Enhanced voice search
+```
+
+
+[Facade](/src/main/kotlin/structural/decorator/Facade.kt)
+-----------------
+Facade is a structural design pattern that provides a simplified interface to a library, a framework, or any other complex set of classes.
+
+#### Example
+```kotlin
+object ComplexNetworkApi {
+    fun makeRequest(url: String, method: String) =
+        """
+                Request: url-$url, method-$method
+                Result: content-secret_juice.png, status_code-200 
+            """
+
+    fun processRequestResult(result: String) =
+        result.substringAfter("content-").substringBefore(",")
+}
+
+object Facade {
+    fun obliviousPhotoRequest(url: String): String {
+        val result = ComplexNetworkApi.makeRequest(url, "GET")
+        return ComplexNetworkApi.processRequestResult(result)
+    }
+}
+```
+
+#### Usage
+```kotlin
+val photo = Facade.obliviousPhotoRequest("www.photolab.com/secret_juice.png")
+trace(photo)
+```
+
+#### Trace
+```
+secret_juice.png
 ```

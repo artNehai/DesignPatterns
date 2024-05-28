@@ -14,6 +14,7 @@ be sure to leave him a star.
   	* [Adapter](#adapter)
   	* [Bridge](#bridge)
   	* [Composite](#composite)
+  	* [Decorator](#decorator)
 
 
 Creational
@@ -530,4 +531,50 @@ Root folder (30Kb): Inner folder, Clients.txt file
 Clients.txt file: Larry, Tyson
 Inner folder (10Kb): Employees.txt file
 Employees.txt file: Mr.Bean
+```
+
+
+[Decorator](/src/main/kotlin/structural/decorator/Decorator.kt)
+-----------------
+Decorator is a structural design pattern that lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors.
+
+#### Example
+```kotlin
+interface Phone {
+    val capacity: Int
+    fun voiceSearch(): String
+}
+
+class BasicPhone : Phone {
+    override val capacity = 256
+    override fun voiceSearch() = "Basic voice search"
+}
+
+class PhoneSpecDecorator(phone: Phone) : Phone by phone {
+    override val capacity = phone.capacity * 2
+}
+
+class PhoneSoftDecorator(phone: Phone) : Phone by phone {
+    override fun voiceSearch() = "Enhanced voice search"
+}
+
+fun Phone.getInfo() = "Capacity - ${capacity}, ${voiceSearch()}"
+```
+
+#### Usage
+```kotlin
+val lowPricePhone = BasicPhone()
+val mediumPricePhone = PhoneSpecDecorator(lowPricePhone)
+val highPricePhone = PhoneSoftDecorator(mediumPricePhone)
+
+trace("Low price phone: ${lowPricePhone.getInfo()}")
+trace("Medium price phone: ${mediumPricePhone.getInfo()}")
+trace("High price phone: ${highPricePhone.getInfo()}")
+```
+
+#### Trace
+```
+Low price phone: Capacity - 256, Basic voice search
+Medium price phone: Capacity - 512, Basic voice search
+High price phone: Capacity - 512, Enhanced voice search
 ```

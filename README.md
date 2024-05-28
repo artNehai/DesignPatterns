@@ -581,7 +581,7 @@ High price phone: Capacity - 512, Enhanced voice search
 ```
 
 
-[Facade](/src/main/kotlin/structural/decorator/Facade.kt)
+[Facade](/src/main/kotlin/structural/facade/Facade.kt)
 -----------------
 Facade is a structural design pattern that provides a simplified interface to a library, a framework, or any other complex set of classes.
 

@@ -17,6 +17,7 @@ be sure to leave him a star.
   	* [Decorator](#decorator)
   	* [Facade](#facade)
   	* [Flyweight](#flyweight)
+  	* [Proxy](#proxy)
 
 
 Creational
@@ -699,4 +700,38 @@ trace("Final board: $chessboard")
 ```
 Initial board: White King on G1, Black King on H5
 Final board: White King on F1, Black King on H5
+```
+
+
+[Proxy](/src/main/kotlin/structural/proxy/Proxy.kt)
+-----------------
+Proxy is a structural design pattern that lets you provide a substitute or placeholder for another object. A proxy controls access to the original object, allowing you to perform something either before or after the request gets through to the original object.
+
+#### Example
+```kotlin
+interface ThirdPartyService {
+    fun doSomeWork(): String
+}
+
+class HeavyweightService : ThirdPartyService {
+    override fun doSomeWork() = "Some work"
+}
+
+class VirtualServiceProxy : ThirdPartyService {
+
+    private val service = lazy { HeavyweightService() }
+
+    override fun doSomeWork() = service.value.doSomeWork()
+}
+```
+
+#### Usage
+```kotlin
+val service: ThirdPartyService = VirtualServiceProxy()
+trace(service.doSomeWork())
+```
+
+#### Trace
+```
+Some work
 ```

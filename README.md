@@ -18,6 +18,8 @@ be sure to leave him a star.
   	* [Facade](#facade)
   	* [Flyweight](#flyweight)
   	* [Proxy](#proxy)
+* [Behavioral Patterns](#behavioral)
+	* [Chain of Responsibility](#chain-of-responsibility)
 
 
 Creational
@@ -734,4 +736,71 @@ trace(service.doSomeWork())
 #### Trace
 ```
 Some work
+```
+
+
+[Chain of Responsibility](/src/main/kotlin/behavioral/cor/ChainOfResponsibility.kt)
+-----------------
+Chain of Responsibility is a behavioral design pattern that lets you pass requests along a chain of handlers. Upon receiving a request, each handler decides either to process the request or to pass it to the next handler in the chain.
+
+#### Example
+```kotlin
+abstract class RequestHandler {
+    var next: RequestHandler? = null
+    abstract fun process(request: Request)
+}
+
+class Authenticator : RequestHandler() {
+    override fun process(request: Request) {
+        if (request.credentials == "J.Bond - MySolidPassword") {
+            trace("Greetings, Mr.Bond. What can I do for you?")
+            request.token = "007"
+        } else throw Exception("Who the hell are you?")
+
+        next?.process(request)
+    }
+}
+
+class Authorizer : RequestHandler() {
+    override fun process(request: Request) {
+        if (request.token == "007") {
+            trace("Here is the requested data")
+        } else throw Exception("No data for you")
+
+        next?.process(request)
+    }
+}
+
+class Sanitizer : RequestHandler() {
+    override fun process(request: Request) {
+        trace("Not injecting anything, are you?")
+        next?.process(request)
+    }
+}
+
+data class Request(
+    val credentials: String,
+    var token: String? = null,
+)
+```
+
+#### Usage
+```kotlin
+val request = Request("J.Bond - MySolidPassword")
+val authenticator = Authenticator()
+val authorizer = Authorizer()
+authenticator.next = authorizer
+
+// Later, a new feature is introduced
+val sanitizer = Sanitizer()
+sanitizer.next = authenticator
+
+sanitizer.process(request)
+```
+
+#### Trace
+```
+Not injecting anything, are you?
+Greetings, Mr.Bond. What can I do for you?
+Here is the requested data
 ```

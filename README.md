@@ -25,7 +25,7 @@ be sure to leave him a star.
 Creational
 ==========
 > In software engineering, creational design patterns are design patterns that deal with object creation mechanisms, trying to create objects in a manner suitable to the
-> situation.The basic form of object creation could result in design problems or added complexity to the design. Creational design patterns solve this problem by somehow
+> situation. The basic form of object creation could result in design problems or added complexity to the design. Creational design patterns solve this problem by somehow
 > controlling this object creation.
 >
 >**Source:** [wikipedia.org](http://en.wikipedia.org/wiki/Creational_pattern)
@@ -737,6 +737,13 @@ trace(service.doSomeWork())
 ```
 Some work
 ```
+
+
+Behavioral
+==========
+>In software engineering, behavioral design patterns are design patterns that identify common communication patterns between objects and realize these patterns. By doing so, these patterns increase flexibility in carrying out this communication.
+>
+>**Source:** [wikipedia.org](http://en.wikipedia.org/wiki/Behavioral_pattern)
 
 
 [Chain of Responsibility](/src/main/kotlin/behavioral/cor/ChainOfResponsibility.kt)
